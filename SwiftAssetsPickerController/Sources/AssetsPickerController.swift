@@ -12,15 +12,17 @@ import Photos
 open class AssetsPickerController: UITableViewController, PHPhotoLibraryChangeObserver {
 	
 	enum AlbumType: Int {
-		case allPhotos
-		case favorites
-		case panoramas
-		case videos
-		case timeLapse
-		case recentlyDeleted
-		case userAlbum
+//        case allPhotos
+//        case favorites
+//        case panoramas
+//        case videos
+//        case timeLapse
+//        case recentlyDeleted
+//        case userAlbum
+        case depthEffect
 		
-		static let titles = ["All Photos", "Favorites", "Panoramas", "Videos", "Time Lapse", "Recently Deleted", "User Album"]
+//        static let titles = ["All Photos", "Favorites", "Panoramas", "Videos", "Time Lapse", "Recently Deleted", "User Album", "Depth Effect"]
+        static let titles = ["Depth Effect"]
 	}
 	
 	struct RootListItem {
@@ -78,13 +80,13 @@ open class AssetsPickerController: UITableViewController, PHPhotoLibraryChangeOb
 		
 			self.items.removeAll(keepingCapacity: false)
 			
-			let allPhotosItem = RootListItem(title: AlbumType.titles[AlbumType.allPhotos.rawValue], albumType: AlbumType.allPhotos, image: self.lastImageFromCollection(nil), collection: nil)
-			let assetsCount = self.assetsCountFromCollection(nil)
-			if assetsCount > 0 {
-				self.items.append(allPhotosItem)
-			}
+//            let allPhotosItem = RootListItem(title: AlbumType.titles[AlbumType.allPhotos.rawValue], albumType: AlbumType.allPhotos, image: self.lastImageFromCollection(nil), collection: nil)
+//            let assetsCount = self.assetsCountFromCollection(nil)
+//            if assetsCount > 0 {
+//                self.items.append(allPhotosItem)
+//            }
 			
-			let smartAlbums = PHAssetCollection.fetchAssetCollections(with: PHAssetCollectionType.smartAlbum, subtype: PHAssetCollectionSubtype.albumRegular, options: nil)
+			let smartAlbums = PHAssetCollection.fetchAssetCollections(with: PHAssetCollectionType.smartAlbum, subtype: PHAssetCollectionSubtype.smartAlbumDepthEffect, options: nil)
 			for i: Int in 0 ..< smartAlbums.count {
 				let smartAlbum = smartAlbums[i]
 				var item: RootListItem? = nil
@@ -95,18 +97,21 @@ open class AssetsPickerController: UITableViewController, PHPhotoLibraryChangeOb
 				}
 				
 				switch smartAlbum.assetCollectionSubtype {
-				case .smartAlbumFavorites:
-					item = RootListItem(title: AlbumType.titles[AlbumType.favorites.rawValue], albumType: AlbumType.favorites, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
-					break
-				case .smartAlbumPanoramas:
-					item = RootListItem(title: AlbumType.titles[AlbumType.panoramas.rawValue], albumType: AlbumType.panoramas, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
-					break
-				case .smartAlbumVideos:
-					item = RootListItem(title: AlbumType.titles[AlbumType.videos.rawValue], albumType: AlbumType.videos, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
-					break
-				case .smartAlbumTimelapses:
-					item = RootListItem(title: AlbumType.titles[AlbumType.timeLapse.rawValue], albumType: AlbumType.timeLapse, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
-					break
+                case .smartAlbumDepthEffect:
+                    item = RootListItem(title: AlbumType.titles[AlbumType.depthEffect.rawValue], albumType: AlbumType.depthEffect, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
+                    break
+//                case .smartAlbumFavorites:
+//                    item = RootListItem(title: AlbumType.titles[AlbumType.favorites.rawValue], albumType: AlbumType.favorites, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
+//                    break
+//                case .smartAlbumPanoramas:
+//                    item = RootListItem(title: AlbumType.titles[AlbumType.panoramas.rawValue], albumType: AlbumType.panoramas, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
+//                    break
+//                case .smartAlbumVideos:
+//                    item = RootListItem(title: AlbumType.titles[AlbumType.videos.rawValue], albumType: AlbumType.videos, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
+//                    break
+//                case .smartAlbumTimelapses:
+//                    item = RootListItem(title: AlbumType.titles[AlbumType.timeLapse.rawValue], albumType: AlbumType.timeLapse, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
+//                    break
 					
 				default:
 					break
@@ -117,17 +122,17 @@ open class AssetsPickerController: UITableViewController, PHPhotoLibraryChangeOb
 				}
 			}
 			
-			let topLevelUserCollections = PHCollectionList.fetchTopLevelUserCollections(with: nil)
-			for i: Int in 0 ..< topLevelUserCollections.count {
-				if let userCollection = topLevelUserCollections[i] as? PHAssetCollection {
-					let assetsCount = self.assetsCountFromCollection(userCollection)
-					if assetsCount == 0 {
-						continue
-					}
-					let item = RootListItem(title: userCollection.localizedTitle, albumType: AlbumType.userAlbum, image: self.lastImageFromCollection(userCollection), collection: userCollection)
-					self.items.append(item)
-				}
-			}
+//            let topLevelUserCollections = PHCollectionList.fetchTopLevelUserCollections(with: nil)
+//            for i: Int in 0 ..< topLevelUserCollections.count {
+//                if let userCollection = topLevelUserCollections[i] as? PHAssetCollection {
+//                    let assetsCount = self.assetsCountFromCollection(userCollection)
+//                    if assetsCount == 0 {
+//                        continue
+//                    }
+//                    let item = RootListItem(title: userCollection.localizedTitle, albumType: AlbumType.userAlbum, image: self.lastImageFromCollection(userCollection), collection: userCollection)
+//                    self.items.append(item)
+//                }
+//            }
 			
 			DispatchQueue.main.async {
 				self.tableView.reloadData()
