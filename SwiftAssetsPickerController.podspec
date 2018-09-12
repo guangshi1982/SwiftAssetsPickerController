@@ -6,7 +6,7 @@ s.description  = "Simple assets picker controller based on iOS 8 Photos framewor
 s.homepage     = "https://github.com/maximbilan/SwiftAssetsPickerController"
 s.license      = { :type => "MIT" }
 s.author       = { "Maxim Bilan" => "maximb.mail@gmail.com" }
-s.platform     = :ios, "8.0"
+s.platform     = :ios, "11.0"
 s.source       = { :git => "https://github.com/maximbilan/SwiftAssetsPickerController.git", :tag => s.version.to_s }
 s.source_files = "Classes", "SwiftAssetsPickerController/Sources/**/*.{swift}"
 s.resources	   = "SwiftAssetsPickerController/Resources/*.*"
