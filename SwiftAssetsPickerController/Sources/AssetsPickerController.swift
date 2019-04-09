@@ -12,7 +12,7 @@ import Photos
 open class AssetsPickerController: UITableViewController, PHPhotoLibraryChangeObserver {
 	
 	enum AlbumType: Int {
-//        case allPhotos
+        case allPhotos
 //        case favorites
 //        case panoramas
 //        case videos
@@ -22,7 +22,7 @@ open class AssetsPickerController: UITableViewController, PHPhotoLibraryChangeOb
         case depthEffect
 		
 //        static let titles = ["All Photos", "Favorites", "Panoramas", "Videos", "Time Lapse", "Recently Deleted", "User Album", "Depth Effect"]
-        static let titles = ["Depth Effect"]
+        static let titles = ["All Photos", "Depth Effect"]
 	}
 	
 	struct RootListItem {
@@ -80,11 +80,11 @@ open class AssetsPickerController: UITableViewController, PHPhotoLibraryChangeOb
 		
 			self.items.removeAll(keepingCapacity: false)
 			
-//            let allPhotosItem = RootListItem(title: AlbumType.titles[AlbumType.allPhotos.rawValue], albumType: AlbumType.allPhotos, image: self.lastImageFromCollection(nil), collection: nil)
-//            let assetsCount = self.assetsCountFromCollection(nil)
-//            if assetsCount > 0 {
-//                self.items.append(allPhotosItem)
-//            }
+            let allPhotosItem = RootListItem(title: AlbumType.titles[AlbumType.allPhotos.rawValue], albumType: AlbumType.allPhotos, image: self.lastImageFromCollection(nil), collection: nil)
+            let assetsCount = self.assetsCountFromCollection(nil)
+            if assetsCount > 0 {
+                self.items.append(allPhotosItem)
+            }
 			
 			let smartAlbums = PHAssetCollection.fetchAssetCollections(with: PHAssetCollectionType.smartAlbum, subtype: PHAssetCollectionSubtype.smartAlbumDepthEffect, options: nil)
 			for i: Int in 0 ..< smartAlbums.count {
