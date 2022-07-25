@@ -12,10 +12,10 @@ import Photos
 open class AssetsPickerController: UITableViewController, PHPhotoLibraryChangeObserver {
 	
 	enum AlbumType: Int {
-//        case allPhotos
+        case allPhotos
 //        case favorites
 //        case panoramas
-//        case videos
+        case videos
 //        case timeLapse
 //        case recentlyDeleted
 //        case userAlbum
@@ -80,11 +80,11 @@ open class AssetsPickerController: UITableViewController, PHPhotoLibraryChangeOb
 		
 			self.items.removeAll(keepingCapacity: false)
 			
-//            let allPhotosItem = RootListItem(title: AlbumType.titles[AlbumType.allPhotos.rawValue], albumType: AlbumType.allPhotos, image: self.lastImageFromCollection(nil), collection: nil)
-//            let assetsCount = self.assetsCountFromCollection(nil)
-//            if assetsCount > 0 {
-//                self.items.append(allPhotosItem)
-//            }
+            let allPhotosItem = RootListItem(title: AlbumType.titles[AlbumType.allPhotos.rawValue], albumType: AlbumType.allPhotos, image: self.lastImageFromCollection(nil), collection: nil)
+            let assetsCount = self.assetsCountFromCollection(nil)
+            if assetsCount > 0 {
+                self.items.append(allPhotosItem)
+            }
 			
 			let smartAlbums = PHAssetCollection.fetchAssetCollections(with: PHAssetCollectionType.smartAlbum, subtype: PHAssetCollectionSubtype.smartAlbumDepthEffect, options: nil)
 			for i: Int in 0 ..< smartAlbums.count {
@@ -106,8 +106,8 @@ open class AssetsPickerController: UITableViewController, PHPhotoLibraryChangeOb
 //                case .smartAlbumPanoramas:
 //                    item = RootListItem(title: AlbumType.titles[AlbumType.panoramas.rawValue], albumType: AlbumType.panoramas, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
 //                    break
-//                case .smartAlbumVideos:
-//                    item = RootListItem(title: AlbumType.titles[AlbumType.videos.rawValue], albumType: AlbumType.videos, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
+                case .smartAlbumVideos:
+                    item = RootListItem(title: AlbumType.titles[AlbumType.videos.rawValue], albumType: AlbumType.videos, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
 //                    break
 //                case .smartAlbumTimelapses:
 //                    item = RootListItem(title: AlbumType.titles[AlbumType.timeLapse.rawValue], albumType: AlbumType.timeLapse, image: self.lastImageFromCollection(smartAlbum), collection: smartAlbum)
