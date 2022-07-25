@@ -22,7 +22,8 @@ open class AssetsPickerController: UITableViewController, PHPhotoLibraryChangeOb
         case depthEffect
 		
 //        static let titles = ["All Photos", "Favorites", "Panoramas", "Videos", "Time Lapse", "Recently Deleted", "User Album", "Depth Effect"]
-        static let titles = ["Depth Effect"]
+        static let titles = ["All Photos", "Videos", "Depth Effect"]
+//        static let titles = ["Depth Effect"]
 	}
 	
 	struct RootListItem {
